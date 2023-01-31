@@ -9,14 +9,11 @@ public class AdditionWithFunctional {
         System.out.println("Sum of the List : " + numbers + " is " + sumOfNumbersOfAList(numbers));
     }
 
-    private static Integer add(Integer a, Integer b) {
-        return a + b;
-    }
 
     private static Integer sumOfNumbersOfAList(List<Integer> numbers) {
         return numbers.
                 stream().
-                reduce(0, AdditionWithFunctional::add);
+                reduce(0, (aggregate, nextNumber) -> (aggregate + nextNumber));
 
     }
 
