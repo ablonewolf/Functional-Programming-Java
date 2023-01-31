@@ -1,5 +1,6 @@
 package AllPracticeExercises;
 
+import java.util.Comparator;
 import java.util.List;
 
 public class PrintAllItems {
@@ -9,6 +10,9 @@ public class PrintAllItems {
         printItemsWithSpring(courses);
         printItemsWithFourLetters(courses);
         printLengthOfWords(courses);
+        printInNaturalOrder(courses);
+        printInReverseOrder(courses);
+        printInOrderOfLength(courses);
     }
 
     private static void printItems(List<String> courses) {
@@ -32,7 +36,7 @@ public class PrintAllItems {
         System.out.println("Printing items which have atleast 4 characters.");
         items.
                 stream().
-                filter(item -> item.length()>=4).
+                filter(item -> item.length() >= 4).
                 forEach(System.out::println);
         System.out.println();
     }
@@ -43,6 +47,33 @@ public class PrintAllItems {
                 stream().
                 map(item -> item.length()).
                 forEach(System.out::println);
+        System.out.println();
+    }
+
+    private static void printInNaturalOrder(List<String> items) {
+        System.out.println("Printing items in the natural order.");
+        items.
+                stream()
+                .sorted(Comparator.naturalOrder())
+                .forEach(System.out::println);
+        System.out.println();
+    }
+
+    private static void printInReverseOrder(List<String> items) {
+        System.out.println("Printing items in the reverse order.");
+        items
+                .stream()
+                .sorted(Comparator.reverseOrder())
+                .forEach(System.out::println);
+        System.out.println();
+    }
+
+    private static void printInOrderOfLength(List<String> items) {
+        System.out.println("Printing items in the order based on their length.");
+        items
+                .stream()
+                .sorted(Comparator.comparing(item -> item.length()))
+                .forEach(System.out::println);
         System.out.println();
     }
 }
