@@ -7,18 +7,42 @@ public class PrintAllItems {
         List<String> courses = List.of("Spring", "Spring Boot", "API", "Microservices", "AWS", "PCF", "Azure", "Docker", "Kubernetes");
         printItems(courses);
         printItemsWithSpring(courses);
+        printItemsWithFourLetters(courses);
+        printLengthOfWords(courses);
     }
 
     private static void printItems(List<String> courses) {
         System.out.println("Printing all the courses");
-        courses.stream().forEach(System.out::println);
+        courses.
+                stream().
+                forEach(System.out::println);
         System.out.println();
     }
 
     private static void printItemsWithSpring(List<String> courses) {
         System.out.println("Printing the courses which has the word Spring");
-        courses.stream().filter(course -> course.contains("Spring"))
-                .forEach(System.out::println);
+        courses.
+                stream().
+                filter(course -> course.contains("Spring")).
+                forEach(System.out::println);
+        System.out.println();
+    }
+
+    private static void printItemsWithFourLetters(List<String> items) {
+        System.out.println("Printing items which have atleast 4 characters.");
+        items.
+                stream().
+                filter(item -> item.length()>=4).
+                forEach(System.out::println);
+        System.out.println();
+    }
+
+    private static void printLengthOfWords(List<String> items) {
+        System.out.println("Printing the length of each word in the list.");
+        items.
+                stream().
+                map(item -> item.length()).
+                forEach(System.out::println);
         System.out.println();
     }
 }
