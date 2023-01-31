@@ -1,18 +1,21 @@
 package FunctionalProgrammingBasic;
 
 import java.util.List;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class StreamAListOfNumbers {
     public static void main(String[] args) {
-        printEvenNumbersInList(1, 2, 3, 4, 5, 6, 7, 8, 9, 10);
-        printSquareOfEvenNumbers(List.of(1, 2, 3, 4, 5, 6, 7, 8, 9, 10));
-        printCubeOfOddNumbers(List.of(1, 2, 3, 4, 5, 6, 7, 8, 9, 10));
+        List<Integer> numbers = List.of(1,2,3,4,5,6,7,8,9,10);
+        printEvenNumbersInList(numbers);
+        printSquareOfEvenNumbers(numbers);
+        printCubeOfOddNumbers(numbers);
+        System.out.println("Printing the even numbers in the list " + numbers + " " + listOfEvenNumbers(numbers));
     }
 
-    private static void printEvenNumbersInList(Integer... numbers) {
+    private static void printEvenNumbersInList(List<Integer> numbers) {
         System.out.println("Printing the even numbers in the list.");
-        Stream.of(numbers).filter(number -> number % 2 == 0).forEach(System.out::println);
+        numbers.stream().filter(number -> number % 2 == 0).forEach(System.out::println);
         System.out.println();
     }
 
@@ -34,5 +37,12 @@ public class StreamAListOfNumbers {
                 map(number -> number * number * number).
                 forEach(System.out::println);
         System.out.println();
+    }
+
+    private static List<Integer> listOfEvenNumbers(List<Integer> numbers) {
+        return numbers
+                .stream()
+                .filter(number -> number % 2 == 0)
+                .collect(Collectors.toList());
     }
 }

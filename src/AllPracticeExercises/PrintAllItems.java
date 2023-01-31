@@ -2,6 +2,7 @@ package AllPracticeExercises;
 
 import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class PrintAllItems {
     public static void main(String[] args) {
@@ -13,6 +14,7 @@ public class PrintAllItems {
         printInNaturalOrder(courses);
         printInReverseOrder(courses);
         printInOrderOfLength(courses);
+        System.out.println("The list of length of the items of the list " + courses + " is " + listOfLengthOfCourseTitles(courses));
     }
 
     private static void printItems(List<String> courses) {
@@ -75,5 +77,12 @@ public class PrintAllItems {
                 .sorted(Comparator.comparing(item -> item.length()))
                 .forEach(System.out::println);
         System.out.println();
+    }
+
+    private static List<Integer> listOfLengthOfCourseTitles(List<String> courses) {
+        return courses
+                .stream()
+                .map(course -> course.length())
+                .collect(Collectors.toList());
     }
 }
