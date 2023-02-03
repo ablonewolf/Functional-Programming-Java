@@ -3,6 +3,7 @@ package FunctionalProgrammingWithCustomClass;
 import java.util.Comparator;
 import java.util.List;
 import java.util.function.Predicate;
+import java.util.stream.Collectors;
 
 public class CourseMain {
     public static void main(String[] args) {
@@ -45,16 +46,36 @@ public class CourseMain {
 
         System.out.println("Total number of students involved in the courses with a review higher than 7 is : " + getTotalStudentsBasedOnAPredicate(courses, reviewFilterPredicate));
         System.out.println();
-        System.out.println("Average number of students involved in the courses with a review higher than 7 is : " + getAverageNumberOfStudents(courses,reviewFilterPredicate));
+        System.out.println("Average number of students involved in the courses with a review higher than 7 is : " + getAverageNumberOfStudents(courses, reviewFilterPredicate));
         System.out.println();
-        System.out.println("The number of courses which has a review of more than 7 is : " + countCourseBasedAFilter(courses,reviewFilterPredicate));
+        System.out.println("The number of courses which has a review of more than 7 is : " + countCourseBasedAFilter(courses, reviewFilterPredicate));
         System.out.println();
-        System.out.println("Total number of students involved in the courses which have students more than 50 is : " + getTotalStudentsBasedOnAPredicate(courses,studentNumberPredicate));
+        System.out.println("Total number of students involved in the courses which have students more than 50 is : " + getTotalStudentsBasedOnAPredicate(courses, studentNumberPredicate));
         System.out.println();
-        System.out.println("Average number of students involved in the courses which have students more than 50 is : " + getAverageNumberOfStudents(courses,studentNumberPredicate));
+        System.out.println("Average number of students involved in the courses which have students more than 50 is : " + getAverageNumberOfStudents(courses, studentNumberPredicate));
         System.out.println();
-        System.out.println("The number of courses which has students more than 50 is : " + countCourseBasedAFilter(courses,studentNumberPredicate));
+        System.out.println("The number of courses which has students more than 50 is : " + countCourseBasedAFilter(courses, studentNumberPredicate));
         System.out.println();
+        System.out.println("Grouping courses on different category criteria.");
+        System.out.println();
+        System.out.println(
+                courses
+                        .stream()
+                        .collect(Collectors.groupingBy(Course::getCategory))
+        );
+        System.out.println();
+        System.out.println(
+                courses
+                        .stream()
+                        .collect(Collectors.groupingBy(Course::getCategory, Collectors.counting()))
+        );
+        System.out.println();
+        System.out.println(
+                courses
+                        .stream()
+                        .collect(Collectors.groupingBy(Course::getCategory,
+                                Collectors.maxBy(Comparator.comparing(Course::getReviewScore))))
+        );
     }
 
     private static void printSortedCourses(List<Course> courses, Comparator<Course> courseComparator) {
